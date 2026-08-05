@@ -35,42 +35,149 @@ The system:
 - PyPDF
 - Streamlit
 
-  
-## ⚙️ Installation
 
-Clone the repository:
+## 📂 Project Structure
+
+```
+paper-chatbot/
+│
+├── app.py                 # Streamlit user interface
+├── rag.py                 # RAG pipeline implementation
+├── utils.py               # PDF processing utilities
+├── requirements.txt       # Project dependencies
+├── .env                   # Environment variables
+├── data/                  # PDF documents
+└── README.md              # Documentation
+```
+
+---
+
+# ⚙️ Installation
+
+## 1. Clone the repository
 
 ```bash
-git clone https://github.com/username/paper-chatbot.git
+git clone https://github.com/your-username/paper-chatbot.git
 cd paper-chatbot
+```
 
-Create a virtual environment:
+---
 
+## 2. Create a virtual environment
+
+```bash
 python -m venv venv
+```
+
+Activate the environment:
+
+### Linux / macOS
+
+```bash
 source venv/bin/activate
+```
 
-Install dependencies:
+### Windows
 
+```bash
+venv\Scripts\activate
+```
+
+---
+
+## 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
-🔑 Configuration
+```
 
-Create an environment file:
+---
 
-OPENAI_API_KEY=your_api_key
+# 🔑 Configuration
 
-▶️ Run the Application
+Create a `.env` file in the root directory:
 
-Start the Streamlit app:
+```env
+OPENAI_API_KEY=your_api_key_here
+```
 
+Replace:
+
+```
+your_api_key_here
+```
+
+with your OpenAI API key.
+
+---
+
+# ▶️ Run the Application
+
+Start the Streamlit application:
+
+```bash
 streamlit run app.py
+```
 
-Open your browser:
+The application will open in your browser.
 
+If it does not open automatically, visit:
+
+```
 http://localhost:8501
+```
 
-👩‍💻 Author
+---
 
-Ghinwa Fakih
+# 💡 Example Questions
+
+After uploading a research paper, you can ask:
+
+- What is the main contribution of this paper?
+- Explain the proposed methodology.
+- What are the limitations of this approach?
+- Summarize the key findings.
+- Compare two research papers.
+- Explain this concept in simple terms.
+
+---
+
+# 📈 Future Improvements
+
+- Add conversation memory for multi-turn discussions
+- Support additional formats (DOCX, HTML, Markdown)
+- Add automatic research paper summarization
+- Generate citations with page references
+- Compare multiple papers automatically
+- Integrate local LLMs such as Llama 3 or Mistral
+- Add evaluation metrics for RAG performance
+
+---
+
+# 🎯 Learning Objectives
+
+This project demonstrates practical experience with:
+
+- Large Language Models (LLMs)
+- Retrieval-Augmented Generation (RAG)
+- Prompt Engineering
+- Text Embeddings
+- Vector Databases
+- Semantic Search
+- Document Processing
+- Building AI applications with Python
+
+---
+
+# 👩‍💻 Author
+
+**Ghinwa Fakih**
 
 PhD in Computer Science
-Research interests: Knowledge Graphs, Semantic Web, NLP, and Large Language Models
+
+Research interests:
+- Knowledge Graphs
+- Semantic Web
+- Natural Language Processing (NLP)
+- Large Language Models (LLMs)
+- Retrieval-Augmented Generation (RAG)
