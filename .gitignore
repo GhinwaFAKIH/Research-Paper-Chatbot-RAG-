@@ -1,0 +1,29 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+vectorstore/
+.env
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# Environment variables
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
