@@ -79,6 +79,13 @@ def ask_question(question):
         k=4
     )
 
+    # DEBUG: display retrieved documents
+    print("\n--- RETRIEVED DOCUMENTS ---")
+
+    for i, document in enumerate(documents):
+        print(f"\n--- Document {i + 1} ---")
+        print(document.page_content[:1000])
+
     # Combine retrieved documents
     context = "\n\n".join(
         document.page_content
