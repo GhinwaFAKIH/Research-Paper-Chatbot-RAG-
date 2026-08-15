@@ -1,13 +1,29 @@
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_openai import ChatOllama
-from langchain_core.prompts import ChatPromptTemplate 
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+
+
+# -----------------------------
+# Embeddings
+# -----------------------------
+
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+
+def get_embeddings():
+    return HuggingFaceEmbeddings(
+        model_name=EMBEDDING_MODEL
+    )
+
+
+# -----------------------------
+# Create vector store
+# -----------------------------
 
 def create_vectorstore(chunks):
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    embeddings = get_embeddings()
 
     vectorstore = Chroma.from_documents(
         documents=chunks,
@@ -18,11 +34,13 @@ def create_vectorstore(chunks):
     return vectorstore
 
 
+# -----------------------------
+# Load vector store
+# -----------------------------
+
 def load_vectorstore():
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    embeddings = get_embeddings()
 
     vectorstore = Chroma(
         persist_directory="./vectorstore",
@@ -31,8 +49,28 @@ def load_vectorstore():
 
     return vectorstore
 
+
+# -----------------------------
+# Local LLM
+# -----------------------------
+
+def get_llm():
+
+    return ChatOpenAI(
+        model="qwen2.5-3b-instruct",
+        base_url="http://localhost:8080/v1",
+        api_key="not-needed",
+        temperature=0
+    )
+
+
+# -----------------------------
+# Ask question
+# -----------------------------
+
 def ask_question(question):
 
+    # Load vector database
     vectorstore = load_vectorstore()
 
     # Retrieve the 4 most relevant chunks
@@ -47,7 +85,7 @@ def ask_question(question):
         for document in documents
     )
 
-    # Create the prompt
+    # Prompt
     prompt = ChatPromptTemplate.from_template(
         """
 You are an assistant specialized in answering questions
@@ -69,13 +107,10 @@ Answer:
 """
     )
 
-    # Create the LLM
-    llm = ChatOllama(
-    model="llama3.2:3b",
-    temperature=0
-)
+    # Local Qwen model through llama.cpp
+    llm = get_llm()
 
-    # Create the chain
+    # Create chain
     chain = prompt | llm
 
     # Generate answer
